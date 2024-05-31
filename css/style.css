@@ -11,9 +11,7 @@
 
 }
 
-body{
-   background-color: blue;
-}
+
 .container{
    min-height: 100vh;
    display: flex;
