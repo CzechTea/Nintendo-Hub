@@ -31,16 +31,16 @@ if(!isset($_SESSION['admin_name'])){
 <body>
 <img src="block.png" alt="Fixing" style="width:128px;height:128px;">
 <div class="container my-5">
-    <h2>Welcome admin</h2>
-    <a class="btn btn-primary" href="create.php" role="button">Add game</a>
+    <h2>Welcome, admin.</h2>
+    <a class="btn btn-primary" href="create.php" role="button">Add Game</a>
     <br>
     <table class="table">
         <thead>
         <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>developer</th>
-            <th>release_date</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Developer</th>
+            <th>Release date</th>
         </tr>
         </thead>
         <tbody>

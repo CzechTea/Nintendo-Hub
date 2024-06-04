@@ -16,7 +16,7 @@ if(!isset($_SESSION['user_name'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>user page</title>
+   <title>User page</title>
 
    <!-- custom css file link  -->
    <style>
@@ -61,12 +61,12 @@ if(!isset($_SESSION['user_name'])){
 <div class="content-box">
 
    <div class="content">
-      <h3>hi, <span>user</span></h3>
-      <h1>welcome <span><?php echo $_SESSION['user_name'] ?></span></h1>
-      <p>this is an user page</p>
-      <a href="login_form.php" class="btn">login</a>
-      <a href="register_form.php" class="btn">register</a>
-      <a href="logout.php" class="btn">logout</a>
+      <h3>Greetings!</h3>
+      <h1>Current user: <span><?php echo $_SESSION['user_name'] ?></span></h1>
+      <p>Welcome to the Nintendo Hub!</p>
+      <a href="login_form.php" class="btn">Login</a>
+      <a href="register_form.php" class="btn">Register</a>
+      <a href="logout.php" class="btn">Logout</a>
    </div>
 
 </div>

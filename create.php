@@ -1,30 +1,54 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['admin_name'])){
+    header('location:login_form.php');
+    exit();
+}
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "nintendohub";
+@include 'config.php';
+
+$connection = new mysqli($servername, $username, $password, $database);
+
 $name = "";
 $developer = "";
 $release_date = "";
 $errorMessage = "";
 
-if ( $_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST["name"];
     $developer = $_POST["developer"];
     $release_date = $_POST["release_date"];
 
-
-    do{
-        if(empty($name) || empty($developer)){
+    do {
+        if (empty($name) || empty($developer) || empty($release_date)){
             $errorMessage = "All the fields are required.";
+            break;
+        }
+        $sql = "INSERT INTO games (name,developer,release_date) 
+                VALUES ('$name', '$developer', '$release_date')";
+        $result = $connection->query($sql);
+
+        if(!$result) {
+            $errorMessage = "An error has occurred: " . $connection->error;
             break;
         }
 
         $name = "";
         $developer = "";
-        $release_date = "";
+        $release_date = "2017-03-03";
 
         $successMessage = "The game was successfully added to the database.";
+
+        haeder("location: admin_page.php");
+        exit;
     } while (false);
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -54,46 +78,44 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'){
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Name</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" placeholder="">
-                </div>
+                <input type="text" class="form-control" name="name" value="<?php echo htmlspecialchars($name); ?>">
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Developer</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="name" value="<?php echo $developer; ?>">
-                </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Developer</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="developer" value="<?php echo htmlspecialchars($developer); ?>">
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Release date</label>
-                <div class="col-sm-6">
-                    <input type="date" class="form-control" name="name" value="<?php echo $release_date; ?>">
-                </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Release date</label>
+            <div class="col-sm-6">
+                <input type="date" class="form-control" name="release_date" value="<?php echo htmlspecialchars($release_date); ?>">
             </div>
-            <?php
-            if(!empty($successMessage)){
-                echo '
-                    <div class="row mb-3">
-                        <div class="offset-sm-3 col-sm-6">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>' . $successMessage . '</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
+        </div>
+        <?php
+        if (!empty($successMessage)) {
+            echo '
+                <div class="row mb-3">
+                    <div class="offset-sm-3 col-sm-6">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>' . $successMessage . '</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
-                    ';
-            }
-
-            ?>
-            <div class="row mb-3">
-                <div class="offset-sm-3 col-sm-3 d-grid">
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="admin_page.php" role="button">Cancel</a>
-                </div>
+            ';
+        }
+        ?>
+        <div class="row mb-3">
+            <div class="offset-sm-3 col-sm-3 d-grid">
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+            <div class="col-sm-3 d-grid">
+                <a class="btn btn-outline-primary" href="admin_page.php" role="button">Cancel</a>
+            </div>
+        </div>
     </form>
 </div>
 </body>
-
-</html> 
+</html>

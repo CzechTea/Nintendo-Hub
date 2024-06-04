@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/nhub.iml" filepath="$PROJECT_DIR$/.idea/nhub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/NHUB.iml" filepath="$PROJECT_DIR$/.idea/NHUB.iml" />
     </modules>
   </component>
 </project>
